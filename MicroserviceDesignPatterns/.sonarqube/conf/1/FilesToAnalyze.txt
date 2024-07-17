@@ -1,0 +1,9 @@
+﻿/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Stock.API/Program.cs
+/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Stock.API/obj/Debug/net8.0/Stock.API.GlobalUsings.g.cs
+/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Stock.API/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Stock.API/obj/Debug/net8.0/Stock.API.AssemblyInfo.cs
+/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Stock.API/obj/Debug/net8.0/Stock.API.MvcApplicationPartsAssemblyInfo.cs
+/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Stock.API/appsettings.Development.json
+/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Stock.API/appsettings.json
+/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Stock.API/Stock.API.http
+/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Stock.API/Properties/launchSettings.json

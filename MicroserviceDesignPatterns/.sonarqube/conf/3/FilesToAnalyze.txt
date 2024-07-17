@@ -1,0 +1,9 @@
+﻿/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Payment.API/Program.cs
+/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Payment.API/obj/Debug/net8.0/Payment.API.GlobalUsings.g.cs
+/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Payment.API/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Payment.API/obj/Debug/net8.0/Payment.API.AssemblyInfo.cs
+/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Payment.API/obj/Debug/net8.0/Payment.API.MvcApplicationPartsAssemblyInfo.cs
+/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Payment.API/appsettings.Development.json
+/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Payment.API/appsettings.json
+/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Payment.API/Payment.API.http
+/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Payment.API/Properties/launchSettings.json

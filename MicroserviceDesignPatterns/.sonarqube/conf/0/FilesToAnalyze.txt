@@ -1,0 +1,1 @@
+﻿/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Shared/Class1.cs
