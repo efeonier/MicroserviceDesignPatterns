@@ -1,1 +1,0 @@
-/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/.sonarqube/out/2

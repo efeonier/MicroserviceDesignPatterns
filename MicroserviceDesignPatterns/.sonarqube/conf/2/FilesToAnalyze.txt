@@ -1,9 +1,0 @@
-﻿/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Order.API/Program.cs
-/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Order.API/obj/Debug/net8.0/Order.API.GlobalUsings.g.cs
-/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Order.API/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
-/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Order.API/obj/Debug/net8.0/Order.API.AssemblyInfo.cs
-/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Order.API/obj/Debug/net8.0/Order.API.MvcApplicationPartsAssemblyInfo.cs
-/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Order.API/appsettings.Development.json
-/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Order.API/appsettings.json
-/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Order.API/Order.API.http
-/Users/efeonier/Projects/Egitim/MicroserviceDesignPatterns/MicroserviceDesignPatterns/Order.API/Properties/launchSettings.json
