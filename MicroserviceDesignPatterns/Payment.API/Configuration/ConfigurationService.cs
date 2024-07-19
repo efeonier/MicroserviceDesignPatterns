@@ -1,8 +1,8 @@
 using MassTransit;
-using Order.API.Consumers;
+using Payment.API.Consumers;
 using Shared;
 
-namespace Order.API.Configuration;
+namespace Payment.API.Configuration;
 
 public static class ConfigurationService
 {
@@ -15,9 +15,8 @@ public static class ConfigurationService
         string password = massTransitSection.GetValue<string>("Password");
         services.AddMassTransit(x =>
         {
-            x.AddConsumer<PaymentCompletedEventConsumer>();
-            x.AddConsumer<PaymentFailedEventConsumer>();
-            x.UsingRabbitMq((ctx, cfg) =>
+            x.AddConsumer<StockReservedEventConsumer>();
+            x.UsingRabbitMq((context, cfg) =>
             {
                 cfg.Host(url,
                 host,
@@ -26,16 +25,11 @@ public static class ConfigurationService
                     c.Username(userName ?? string.Empty);
                     c.Password(password ?? string.Empty);
                 });
-                cfg.ConfigureEndpoints(ctx);
-                cfg.ReceiveEndpoint(RabbitMqSettings.OrderPaymentCompletedEventQueueName,
+                cfg.ConfigureEndpoints(context);
+                cfg.ReceiveEndpoint(RabbitMqSettings.StockReservedEventQueueName,
                 e =>
                 {
-                    e.ConfigureConsumer<PaymentCompletedEventConsumer>(ctx);
-                });
-                cfg.ReceiveEndpoint(RabbitMqSettings.OrderPaymentFailedEventQueueName,
-                e =>
-                {
-                    e.ConfigureConsumer<PaymentFailedEventConsumer>(ctx);
+                    e.ConfigureConsumer<StockReservedEventConsumer>(context);
                 });
             });
         });
