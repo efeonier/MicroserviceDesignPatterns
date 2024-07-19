@@ -11,4 +11,6 @@ public class PaymentFailedEvent
 
     [MaxLength(500)]
     public string Message { get; set; } = string.Empty;
+
+    public List<OrderItemMessage> OrderItems { get; set; } = [];
 }

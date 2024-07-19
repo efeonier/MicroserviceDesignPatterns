@@ -32,7 +32,7 @@ public class StockReservedEventConsumer(ILogger<StockReservedEventConsumer> logg
             };
             await paymentRepository.AddAsync(payment);
             logger.LogInformation("{PaymentTotalPrice} TL was not withdrawn from credit card for user Id:{MessageBuyerId}", context.Message.Payment.TotalPrice, context.Message.BuyerId);
-            await publishEndpoint.Publish(new PaymentFailedEvent() { OrderId = context.Message.OrderId, BuyerId = context.Message.BuyerId, Message = "Not withdrawn" });
+            await publishEndpoint.Publish(new PaymentFailedEvent() { OrderId = context.Message.OrderId, BuyerId = context.Message.BuyerId, Message = "Not withdrawn", OrderItems = context.Message.OrderItems });
         }
     }
 }

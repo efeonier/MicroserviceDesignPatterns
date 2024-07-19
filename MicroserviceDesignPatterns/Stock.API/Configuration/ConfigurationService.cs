@@ -16,6 +16,7 @@ public static class ConfigurationService
         services.AddMassTransit(x =>
         {
             x.AddConsumer<OrderCreatedEventConsumer>();
+            x.AddConsumer<PaymentFailedEventConsumer>();
             x.UsingRabbitMq((context, cfg) =>
             {
                 cfg.Host(url,
@@ -30,6 +31,11 @@ public static class ConfigurationService
                 e =>
                 {
                     e.ConfigureConsumer<OrderCreatedEventConsumer>(context);
+                });
+                cfg.ReceiveEndpoint(RabbitMqSettings.StockPaymentFailedEventQueueName,
+                e =>
+                {
+                    e.ConfigureConsumer<PaymentFailedEventConsumer>(context);
                 });
             });
 
