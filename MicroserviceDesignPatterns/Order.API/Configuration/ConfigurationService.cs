@@ -17,6 +17,7 @@ public static class ConfigurationService
         {
             x.AddConsumer<PaymentCompletedEventConsumer>();
             x.AddConsumer<PaymentFailedEventConsumer>();
+            x.AddConsumer<StockNotReservedEventConsumer>();
             x.UsingRabbitMq((ctx, cfg) =>
             {
                 cfg.Host(url,
@@ -36,6 +37,11 @@ public static class ConfigurationService
                 e =>
                 {
                     e.ConfigureConsumer<PaymentFailedEventConsumer>(ctx);
+                });
+                cfg.ReceiveEndpoint(RabbitMqSettings.OrderStockNotReservedEventQueueName,
+                e =>
+                {
+                    e.ConfigureConsumer<StockNotReservedEventConsumer>(ctx);
                 });
             });
         });
