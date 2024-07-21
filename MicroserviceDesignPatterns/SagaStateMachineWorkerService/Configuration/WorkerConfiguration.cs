@@ -1,4 +1,4 @@
-namespace SagaStateMachineWorkerService.WorkerServices;
+namespace SagaStateMachineWorkerService.Configuration;
 
 public static class WorkerConfiguration
 {
