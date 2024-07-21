@@ -1,6 +1,4 @@
 using MassTransit;
-using Payment.API.Consumers;
-using Shared;
 
 namespace Payment.API.Configuration;
 
@@ -15,7 +13,6 @@ public static class ConfigurationService
         string password = massTransitSection.GetValue<string>("Password");
         services.AddMassTransit(x =>
         {
-            x.AddConsumer<StockReservedEventConsumer>();
             x.UsingRabbitMq((context, cfg) =>
             {
                 cfg.Host(url,
@@ -26,11 +23,6 @@ public static class ConfigurationService
                     c.Password(password ?? string.Empty);
                 });
                 cfg.ConfigureEndpoints(context);
-                cfg.ReceiveEndpoint(RabbitMqSettings.StockReservedEventQueueName,
-                e =>
-                {
-                    e.ConfigureConsumer<StockReservedEventConsumer>(context);
-                });
             });
         });
         return services;
