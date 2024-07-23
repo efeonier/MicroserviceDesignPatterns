@@ -4,7 +4,7 @@ public static class WorkerConfiguration
 {
     public static IServiceCollection AddWorkerServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddHostedService<Worker>();
+        //services.AddHostedService<Worker>();
 
         return services;
     }

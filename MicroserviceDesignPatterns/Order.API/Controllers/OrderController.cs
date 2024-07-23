@@ -6,6 +6,8 @@ using Order.API.Entities;
 using Order.API.Enums;
 using Order.API.Repositories.Interface;
 using Shared;
+using Shared.SagaOrchestration.Concrete;
+using Shared.SagaOrchestration.Interface;
 
 namespace Order.API.Controllers;
 
@@ -14,11 +16,11 @@ namespace Order.API.Controllers;
 public class OrderController : ControllerBase
 {
     private readonly IOrderRepository _orderRepository;
-    private readonly IPublishEndpoint _publishEndpoint;
-    public OrderController(IPublishEndpoint publishEndpoint, IOrderRepository orderRepository)
+    private readonly ISendEndpointProvider _sendEndpointProvider;
+    public OrderController(IOrderRepository orderRepository, ISendEndpointProvider sendEndpointProvider)
     {
-        _publishEndpoint = publishEndpoint;
         _orderRepository = orderRepository;
+        _sendEndpointProvider = sendEndpointProvider;
     }
 
     [HttpPost]
@@ -41,8 +43,10 @@ public class OrderController : ControllerBase
             var payments = orderCreate.Payment.Adapt<PaymentMessage>();
             payments.TotalPrice = orderCreate.OrderItems.Sum(s => s.Price * s.Count);
 
-            var orderCreatedEvent = new OrderCreatedEvent() { BuyerId = orderCreate.BuyerId, OrderId = newOrder.Id, PaymentMessage = payments, OrderItems = orderCreate.OrderItems.Adapt<List<OrderItemMessage>>() };
-            await _publishEndpoint.Publish(orderCreatedEvent);
+
+            var orderCreatedRequestEvent = new OrderCreatedRequestEvent() { BuyerId = orderCreate.BuyerId, OrderId = newOrder.Id, Payment = payments, OrderItems = orderCreate.OrderItems.Adapt<List<OrderItemMessage>>() };
+            var sendEndpoint = await _sendEndpointProvider.GetSendEndpoint(new Uri($"queue:{RabbitMqSettings.OrderSaga}"));
+            await sendEndpoint.Send<IOrderCreatedRequestEvent>(orderCreatedRequestEvent);
         }
         catch (Exception ex)
         {

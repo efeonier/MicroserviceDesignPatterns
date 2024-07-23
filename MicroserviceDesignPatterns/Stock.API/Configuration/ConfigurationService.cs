@@ -1,4 +1,6 @@
 using MassTransit;
+using Shared;
+using Stock.API.Consumer;
 
 namespace Stock.API.Configuration;
 
@@ -13,6 +15,7 @@ public static class ConfigurationService
         string password = massTransitSection.GetValue<string>("Password");
         services.AddMassTransit(x =>
         {
+            x.AddConsumer<OrderCreatedEventConsumer>();
             x.UsingRabbitMq((context, cfg) =>
             {
                 cfg.Host(url,
@@ -23,9 +26,13 @@ public static class ConfigurationService
                     c.Password(password ?? string.Empty);
                 });
                 cfg.ConfigureEndpoints(context);
-            });
 
-            
+                cfg.ReceiveEndpoint(RabbitMqSettings.StockReservedEventQueueName,
+                e =>
+                {
+                    e.ConfigureConsumer<OrderCreatedEventConsumer>(context);
+                });
+            });
         });
         return services;
     }

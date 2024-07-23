@@ -2,13 +2,14 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
-        <Nullable>enable</Nullable>
+        <Nullable>disable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <UserSecretsId>dotnet-SagaStateMachineWorkerService-3A550FB0-95F8-45C6-B152-88BD5A2A2443</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
+        <PackageReference Include="MassTransit.EntityFrameworkCore" Version="8.2.3" />
         <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="7.3.1" />
         <PackageReference Include="MassTransit.RabbitMQ" Version="8.2.3" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
@@ -26,5 +27,9 @@
 
     <ItemGroup>
       <Folder Include="WorkerServices\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Shared\Shared.csproj" />
     </ItemGroup>
 </Project>

@@ -1,4 +1,9 @@
 using MassTransit;
+using Microsoft.EntityFrameworkCore;
+using SagaStateMachineWorkerService.Context;
+using SagaStateMachineWorkerService.Entities;
+using Shared;
+using System.Reflection;
 
 namespace SagaStateMachineWorkerService.Configuration;
 
@@ -13,6 +18,20 @@ public static class ConfigurationService
         string password = massTransitSection.GetValue<string>("Password");
         services.AddMassTransit(x =>
         {
+            x.AddSagaStateMachine<OrderStateMachine, OrderStateInstance>()
+                .EntityFrameworkRepository(opt =>
+                {
+                    opt.AddDbContext<DbContext, OrderStateDbContext>((provider, builder) =>
+                    {
+                        builder.UseSqlServer(configuration.GetConnectionString("SqlServer"),
+                        m =>
+                        {
+                            m.MigrationsAssembly(Assembly.GetExecutingAssembly().GetName().Name);
+                        });
+                    });
+                });
+
+
             x.UsingRabbitMq((ctx, cfg) =>
             {
                 cfg.Host(url,
@@ -23,8 +42,17 @@ public static class ConfigurationService
                     c.Password(password ?? string.Empty);
                 });
                 cfg.ConfigureEndpoints(ctx);
+                
+                cfg.ReceiveEndpoint(RabbitMqSettings.OrderSaga,
+                e =>
+                {
+                    e.UseMessageRetry(a => a.Immediate(4));
+                    e.ConfigureSaga<OrderStateInstance>(ctx);
+                });
             });
         });
+
+
         return services;
     }
 }
