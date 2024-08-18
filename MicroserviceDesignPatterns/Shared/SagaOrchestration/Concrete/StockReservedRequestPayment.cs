@@ -2,14 +2,15 @@ using Shared.SagaOrchestration.Interface;
 
 namespace Shared.SagaOrchestration.Concrete;
 
-public class StockReservedRequestPaymentEvent : IStockReservedRequestPaymentEvent
+public class StockReservedRequestPayment : IStockReservedRequestPayment
 {
-    public StockReservedRequestPaymentEvent(Guid correlationId)
+    public StockReservedRequestPayment(Guid correlationId)
     {
         CorrelationId = correlationId;
     }
-    public Guid CorrelationId { get; }
     public PaymentMessage PaymentMessage { get; set; }
     public List<OrderItemMessage> OrderItems { get; set; }
+
+    public Guid CorrelationId { get; }
     public string BuyerId { get; set; }
 }

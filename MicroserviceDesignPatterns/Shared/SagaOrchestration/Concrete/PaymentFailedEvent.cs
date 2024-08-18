@@ -1,15 +1,16 @@
 using Shared.SagaOrchestration.Interface;
-using System.ComponentModel.DataAnnotations;
 
 namespace Shared.SagaOrchestration.Concrete;
 
-public class StockNotReservedEvent : IStockNotReservedEvent
+public class PaymentFailedEvent: IPaymentFailedEvent
 {
-    public StockNotReservedEvent(Guid correlationId)
+    public PaymentFailedEvent(Guid correlationId)
     {
         CorrelationId = correlationId;
     }
 
     public string Reason { get; set; }
+    public List<OrderItemMessage> OrderItems { get; set; }
+
     public Guid CorrelationId { get; }
 }

@@ -1,6 +1,6 @@
 using MassTransit;
 using Shared;
-using Stock.API.Consumer;
+using Stock.API.Consumers;
 
 namespace Stock.API.Configuration;
 
@@ -16,6 +16,8 @@ public static class ConfigurationService
         services.AddMassTransit(x =>
         {
             x.AddConsumer<OrderCreatedEventConsumer>();
+            x.AddConsumer<StockRollBackMessageConsumer>();
+            
             x.UsingRabbitMq((context, cfg) =>
             {
                 cfg.Host(url,
@@ -25,12 +27,16 @@ public static class ConfigurationService
                     c.Username(userName ?? string.Empty);
                     c.Password(password ?? string.Empty);
                 });
-                cfg.ConfigureEndpoints(context);
 
                 cfg.ReceiveEndpoint(RabbitMqSettings.StockReservedEventQueueName,
                 e =>
                 {
                     e.ConfigureConsumer<OrderCreatedEventConsumer>(context);
+                });
+                
+                cfg.ReceiveEndpoint(RabbitMqSettings.StockRollBackMessageQueueName, e =>
+                {
+                    e.ConfigureConsumer<StockRollBackMessageConsumer>(context);
                 });
             });
         });

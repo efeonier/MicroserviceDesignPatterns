@@ -1,4 +1,6 @@
 using MassTransit;
+using Order.API.Consumers;
+using Shared;
 
 namespace Order.API.Configuration;
 
@@ -13,6 +15,9 @@ public static class ConfigurationService
         string password = massTransitSection.GetValue<string>("Password");
         services.AddMassTransit(x =>
         {
+            x.AddConsumer<OrderRequestCompletedEventConsumer>();
+            x.AddConsumer<OrderRequestFailedEventConsumer>();
+
             x.UsingRabbitMq((ctx, cfg) =>
             {
                 cfg.Host(url,
@@ -22,7 +27,18 @@ public static class ConfigurationService
                     c.Username(userName ?? string.Empty);
                     c.Password(password ?? string.Empty);
                 });
-                cfg.ConfigureEndpoints(ctx);
+
+                cfg.ReceiveEndpoint(RabbitMqSettings.OrderRequestCompletedEventtQueueName,
+                x =>
+                {
+                    x.ConfigureConsumer<OrderRequestCompletedEventConsumer>(ctx);
+                });
+
+                cfg.ReceiveEndpoint(RabbitMqSettings.OrderRequestFailedEventtQueueName,
+                x =>
+                {
+                    x.ConfigureConsumer<OrderRequestFailedEventConsumer>(ctx);
+                });
             });
         });
         return services;

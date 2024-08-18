@@ -3,8 +3,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Shared.SagaOrchestration.Concrete;
 
-public class StockReservedEvent(Guid correlationId) : IStockReservedEvent
+public class StockReservedEvent : IStockReservedEvent
 {
-    public List<OrderItemMessage> OrderItems { get; set; } = [];
-    public Guid CorrelationId { get; } = correlationId;
+    public StockReservedEvent(Guid correlationId)
+    {
+        CorrelationId = correlationId;
+    }
+
+    public List<OrderItemMessage> OrderItems { get; set; }
+
+    public Guid CorrelationId { get; }
 }
