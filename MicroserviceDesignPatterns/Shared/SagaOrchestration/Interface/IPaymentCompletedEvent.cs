@@ -2,6 +2,7 @@ using MassTransit;
 
 namespace Shared.SagaOrchestration.Interface;
 
-public interface IPaymentCompletedEvent : CorrelatedBy<Guid>
+public interface IPaymentCompletedEvent 
 {
+    public Guid CorrelationId { get; set; }
 }

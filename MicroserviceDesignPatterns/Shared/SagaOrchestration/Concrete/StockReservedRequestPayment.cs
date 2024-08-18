@@ -11,6 +11,6 @@ public class StockReservedRequestPayment : IStockReservedRequestPayment
     public PaymentMessage PaymentMessage { get; set; }
     public List<OrderItemMessage> OrderItems { get; set; }
 
-    public Guid CorrelationId { get; }
+    public Guid CorrelationId { get; set; }
     public string BuyerId { get; set; }
 }

@@ -8,6 +8,5 @@ public class PaymentCompletedEvent: IPaymentCompletedEvent
     {
         CorrelationId = correlationId;
     }
-
-    public Guid CorrelationId { get; }
+    public Guid CorrelationId { get; set; }
 }

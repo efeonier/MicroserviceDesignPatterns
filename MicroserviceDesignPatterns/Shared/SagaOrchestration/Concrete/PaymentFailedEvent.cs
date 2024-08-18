@@ -12,5 +12,5 @@ public class PaymentFailedEvent: IPaymentFailedEvent
     public string Reason { get; set; }
     public List<OrderItemMessage> OrderItems { get; set; }
 
-    public Guid CorrelationId { get; }
+    public Guid CorrelationId { get; set; }
 }

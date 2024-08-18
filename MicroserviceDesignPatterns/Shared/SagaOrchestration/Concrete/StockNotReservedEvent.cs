@@ -11,5 +11,5 @@ public class StockNotReservedEvent : IStockNotReservedEvent
     }
 
     public string Reason { get; set; }
-    public Guid CorrelationId { get; }
+    public Guid CorrelationId { get; set; }
 }
