@@ -4,6 +4,6 @@ namespace Shared.SagaOrchestration.Interface;
 
 public interface IStockNotReservedEvent 
 {
-    public Guid CorrelationId { get; set; }
+    public Guid CorrelationId { get; }
     public string Reason { get; set; }
 }
