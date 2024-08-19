@@ -1,4 +1,5 @@
 using MassTransit;
+using Microsoft.EntityFrameworkCore;
 using Shared.SagaOrchestration.Concrete;
 using Shared.SagaOrchestration.Interface;
 using Stock.API.Repositories.Interface;
@@ -22,15 +23,15 @@ public class OrderCreatedEventConsumer : IConsumer<IOrderCreatedEvent>
 
         foreach (var item in context.Message.OrderItems)
         {
-            var itemStatus = await _stockRepository.GetAsync(x => x.ProductId == item.ProductId && x.Quantity > item.Count);
-            stockResult.Add(itemStatus != null);
+            var itemStatus = await _stockRepository.GetByIdAsync(item.ProductId);
+            stockResult.Add(itemStatus != null && itemStatus.Quantity > item.Count);
         }
 
         if (stockResult.TrueForAll(x => x.Equals(true)))
         {
             foreach (var item in context.Message.OrderItems)
             {
-                var stock = await _stockRepository.GetAsync(x => x.ProductId == item.ProductId);
+                var stock = await _stockRepository.GetByIdAsync(item.ProductId);
 
                 if (stock != null)
                 {
