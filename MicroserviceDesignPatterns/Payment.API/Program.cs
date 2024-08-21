@@ -1,18 +1,5 @@
-using Microsoft.EntityFrameworkCore;
-using Payment.API.Configuration;
-using Payment.API.Context;
-using Payment.API.Repositories.Concrete;
-using Payment.API.Repositories.Interface;
-
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<PaymentDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
-});
 
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
-builder.Services.AddServices(builder.Configuration);
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -29,4 +16,41 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-await app.RunAsync();
+var summaries = new[]
+{
+    "Freezing",
+    "Bracing",
+    "Chilly",
+    "Cool",
+    "Mild",
+    "Warm",
+    "Balmy",
+    "Hot",
+    "Sweltering",
+    "Scorching"
+};
+
+app.MapGet(
+        "/weatherforecast",
+        handler: () =>
+        {
+            var forecast = Enumerable
+                .Range(1, 5)
+                .Select(index => new WeatherForecast(
+                    DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                    Random.Shared.Next(-20, 55),
+                    summaries[Random.Shared.Next(summaries.Length)]
+                ))
+                .ToArray();
+            return forecast;
+        }
+    )
+    .WithName("GetWeatherForecast")
+    .WithOpenApi();
+
+app.Run();
+
+internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+{
+    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+}

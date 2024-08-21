@@ -1,31 +1,11 @@
-using Microsoft.EntityFrameworkCore;
-using Stock.API.Configuration;
-using Stock.API.Context;
-using Stock.API.Repositories.Concrete;
-using Stock.API.Repositories.Interface;
-
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<StockDbContext>(options =>
-{
-    options.UseInMemoryDatabase("StockDB");
-});
-
-builder.Services.AddServices(builder.Configuration);
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-builder.Services.AddScoped<IStockRepository, StockRepository>();
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-
-using var scope = app.Services.CreateScope();
-await using var context = scope.ServiceProvider.GetRequiredService<StockDbContext>();
-context.Stocks.Add(new Stock.API.Entities.Stock() { Id = 1, ProductId = 1, Quantity = 100 });
-context.Stocks.Add(new Stock.API.Entities.Stock() { Id = 2, ProductId = 2, Quantity = 200 });
-await context.SaveChangesAsync();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -36,4 +16,41 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-await app.RunAsync();
+var summaries = new[]
+{
+    "Freezing",
+    "Bracing",
+    "Chilly",
+    "Cool",
+    "Mild",
+    "Warm",
+    "Balmy",
+    "Hot",
+    "Sweltering",
+    "Scorching"
+};
+
+app.MapGet(
+        "/weatherforecast",
+        handler: () =>
+        {
+            var forecast = Enumerable
+                .Range(1, 5)
+                .Select(index => new WeatherForecast(
+                    DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                    Random.Shared.Next(-20, 55),
+                    summaries[Random.Shared.Next(summaries.Length)]
+                ))
+                .ToArray();
+            return forecast;
+        }
+    )
+    .WithName("GetWeatherForecast")
+    .WithOpenApi();
+
+app.Run();
+
+internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+{
+    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+}
