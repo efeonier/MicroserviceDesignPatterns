@@ -1,34 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.API", "Order.API\Order.API.csproj", "{726315F7-69CD-42D2-BA92-D0B86F235016}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stock.API", "Stock.API\Stock.API.csproj", "{A3EEA684-DB0C-436D-9E9E-3A1002DE4CA9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payment.API", "Payment.API\Payment.API.csproj", "{DFE62D4C-25A2-42F5-B91F-C42597C60EB4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{B31DC896-5C5E-4E41-8EF0-AD1C7626EE9E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{726315F7-69CD-42D2-BA92-D0B86F235016}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{726315F7-69CD-42D2-BA92-D0B86F235016}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{726315F7-69CD-42D2-BA92-D0B86F235016}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{726315F7-69CD-42D2-BA92-D0B86F235016}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A3EEA684-DB0C-436D-9E9E-3A1002DE4CA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A3EEA684-DB0C-436D-9E9E-3A1002DE4CA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A3EEA684-DB0C-436D-9E9E-3A1002DE4CA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A3EEA684-DB0C-436D-9E9E-3A1002DE4CA9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DFE62D4C-25A2-42F5-B91F-C42597C60EB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DFE62D4C-25A2-42F5-B91F-C42597C60EB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DFE62D4C-25A2-42F5-B91F-C42597C60EB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DFE62D4C-25A2-42F5-B91F-C42597C60EB4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B31DC896-5C5E-4E41-8EF0-AD1C7626EE9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B31DC896-5C5E-4E41-8EF0-AD1C7626EE9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B31DC896-5C5E-4E41-8EF0-AD1C7626EE9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B31DC896-5C5E-4E41-8EF0-AD1C7626EE9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
