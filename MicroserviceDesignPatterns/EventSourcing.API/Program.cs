@@ -1,4 +1,8 @@
+using EventSourcing.API.Context;
 using EventSourcing.API.EventStores;
+using Microsoft.EntityFrameworkCore;
+using System.Configuration;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,9 +10,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEventStore(builder.Configuration);
 builder.Services.AddSingleton<ProductStream>();
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
+});
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 var app = builder.Build();
 
