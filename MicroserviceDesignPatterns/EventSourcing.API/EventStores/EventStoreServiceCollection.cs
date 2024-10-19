@@ -1,17 +1,20 @@
+using EventStore.Client;
+
 namespace EventSourcing.API.EventStores;
 
 public static class EventStoreServiceCollection
 {
-    public static IServiceCollection AddEventStore(this IServiceCollection services, IConfiguration configuration)
+    public static void AddEventStore(this IServiceCollection services, IConfiguration configuration)
     {
-        string? connectionString = configuration.GetConnectionString("EventStore");
-        services.AddEventStoreClient(connectionString ?? string.Empty);
-        using var logFactory = LoggerFactory.Create(builder =>
+        string connectionString = configuration.GetConnectionString("EventStore") ?? string.Empty;
+        services.AddEventStoreClient(connectionString,
+        s =>
         {
-            builder.SetMinimumLevel(LogLevel.Information);
-            builder.AddConsole();
+            s.ConnectionName = "EventStoreApi";
+            s.LoggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+            s.ConnectivitySettings.Insecure = true;
         });
-        configuration.Bind("EventStore", logFactory);
-        return services;
+        services.AddSingleton<ProductStream>();
     }
+
 }
